@@ -1,5 +1,5 @@
 # rate-my-prof-api
-Python API to get some stuff from ratemyprofessors.com. 
+A more complete python-rewritten version of https://github.com/snow4060/rmp-api.
 
 Citations:
 https://github.com/snow4060/rmp-api

@@ -1,0 +1,61 @@
+query RatingsListQuery(
+  $count: Int!
+  $id: ID!
+  $courseFilter: String
+  $cursor: String
+) {
+  node(id: $id) {
+    __typename
+    ... on Teacher {
+      id
+      legacyId
+      lastName
+      numRatings
+      school {
+        id
+        legacyId
+        name
+        city
+        state
+        avgRating
+        numRatings
+      }
+      ratings(first: $count, after: $cursor, courseFilter: $courseFilter) {
+        edges {
+          cursor
+          node {
+            id
+            legacyId
+            comment
+            date
+            class
+            helpfulRating
+            clarityRating
+            difficultyRating
+            ratingTags
+            flagStatus
+            createdByUser
+            attendanceMandatory
+            wouldTakeAgain
+            grade
+            textbookUse
+            isForOnlineClass
+            isForCredit
+            thumbsUpTotal
+            thumbsDownTotal
+            teacherNote {
+              id
+              teacherId
+              comment
+            }
+          }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+    id
+  }
+}

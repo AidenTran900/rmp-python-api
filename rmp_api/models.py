@@ -1,8 +1,4 @@
-"""
-models.py
-
-shared dataclasses for the RMP API wrapper.
-"""
+"""Dataclasses and enums shared across the rmp_api package."""
 
 from dataclasses import dataclass, field
 from enum import StrEnum

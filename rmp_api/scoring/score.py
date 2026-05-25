@@ -1,9 +1,4 @@
-"""
-score.py
-
-Main entry point for professor scoring. Orchestrates all signals into a
-single ProfessorScore with a composite score.
-"""
+"""Scoring functions: compute quality signals and composite scores from rating lists."""
 
 from ..models import ProfessorComparison, ProfessorScore, Rating, ScoreTimeline, SortBy, SplitScore, TimePeriod
 from .helpers import _overall, _parse_date
@@ -299,7 +294,7 @@ def compare_professors(
         * ``sort_by`` — the resolved :class:`~models.SortBy` value used for ranking.
         * ``best`` / ``worst`` — labels of the top and bottom professors.
         * ``deltas`` — ``{label: float}`` difference from the best value
-          on the ``sort_by`` field (best = ``0.0``, others ``<= 0.0``).
+            on the ``sort_by`` field (best = ``0.0``, others ``<= 0.0``).
 
         Returns a comparison with empty ``ranking`` if ``professors`` is empty.
 

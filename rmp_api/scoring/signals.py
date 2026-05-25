@@ -1,9 +1,4 @@
-"""
-signals.py
-
-Individual signal computers. Each function takes a list of Rating objects
-and returns a single normalized metric.
-"""
+"""Individual signal computers. Each takes a list of Rating objects and returns a normalized metric."""
 
 import math
 from collections import Counter

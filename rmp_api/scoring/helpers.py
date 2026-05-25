@@ -1,8 +1,4 @@
-"""
-helpers.py
-
-Private utilities shared across the scoring subpackage.
-"""
+"""Private utilities shared across the scoring subpackage."""
 
 import math
 from datetime import datetime, timezone

@@ -1,18 +1,4 @@
-"""
-client.py
-
-RateMyProfessors GraphQL API client.
-
-Exports:
-    search_schools(school_name) -> list[dict] | None
-    search_professors(professor_name, school_id) -> list[dict] | None
-    get_professor_summary(professor_name, school_id) -> ProfessorRating
-    get_ratings_page(professor_id, ...) -> tuple[list[Rating], bool, str | None]
-    get_all_ratings(professor_id, ...) -> list[Rating]
-    get_representative_ratings(professor_id, n) -> list[Rating]
-    get_courses(professor_id) -> list[dict] | None
-    filter_ratings_by_keywords(ratings, keywords, ...) -> list[Rating]
-"""
+"""Functions for searching schools and professors, fetching ratings, and filtering reviews."""
 
 from functools import lru_cache
 from pathlib import Path
@@ -22,11 +8,9 @@ import requests
 from .models import ProfessorRating, Rating
 
 
-"""
----------------------------------------------------------------------------
-Constants
----------------------------------------------------------------------------
-"""
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
 
 API_LINK = "https://www.ratemyprofessors.com/graphql"
 
@@ -52,11 +36,9 @@ TEACHER_COURSES_QUERY = (_QUERIES_DIR / "teacher_courses.graphql").read_text()
 
 
 
-"""
----------------------------------------------------------------------------
-Private helpers
----------------------------------------------------------------------------
-"""
+# ---------------------------------------------------------------------------
+# Private helpers
+# ---------------------------------------------------------------------------
 
 def _graphql(query: str, variables: dict) -> dict:
     """
@@ -117,11 +99,9 @@ def _parse_rating(edge: dict) -> Rating:
 
 
 
-"""
----------------------------------------------------------------------------
-API functions
----------------------------------------------------------------------------
-"""
+# ---------------------------------------------------------------------------
+# API functions
+# ---------------------------------------------------------------------------
 
 @lru_cache(maxsize=128)
 def search_schools(school_name: str) -> list[dict] | None:

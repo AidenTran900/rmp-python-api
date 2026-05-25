@@ -14,3 +14,4 @@ nav:
   - API Reference:
     - Client: api/client.md
     - Models: api/models.md
+    - Scoring: api/scoring.md

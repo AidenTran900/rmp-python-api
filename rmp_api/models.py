@@ -140,3 +140,22 @@ class ProfessorScore:
 
     # Composite
     composite_score: float = 0.0
+
+
+@dataclass
+class SplitScore:
+    """
+    Professor scores split by delivery format.
+
+    Produced by :func:`~scoring.compute_split_score`. Each field is a full
+    :class:`ProfessorScore` computed from the relevant subset of ratings.
+
+    Attributes:
+        online: Score from ratings where ``is_for_online_class`` is ``True``.
+        in_person: Score from ratings where ``is_for_online_class`` is ``False``.
+        combined: Score from all ratings regardless of format.
+    """
+
+    online: ProfessorScore
+    in_person: ProfessorScore
+    combined: ProfessorScore

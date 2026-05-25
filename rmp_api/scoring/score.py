@@ -5,7 +5,7 @@ Main entry point for professor scoring. Orchestrates all signals into a
 single ProfessorScore with a composite score.
 """
 
-from ..models import ProfessorScore, Rating
+from ..models import ProfessorScore, Rating, SplitScore
 from .helpers import _overall, _parse_date
 from .presets import WEIGHT_PRESETS
 from .signals import (
@@ -109,4 +109,39 @@ def compute_score(
         top_tags=top_tags[:10] if (top_tags := compute_tag_frequencies(ratings)) else [],
         difficulty_histogram=compute_difficulty_histogram(ratings),
         composite_score=composite,
+    )
+
+
+def compute_split_score(
+    ratings: list[Rating],
+    weights: dict[str, float] | None = None,
+    half_life_days: float = 365.0,
+) -> SplitScore:
+    """
+    Compute professor scores split by online vs. in-person delivery format.
+
+    Runs :func:`compute_score` three times — once per subset and once for all
+    ratings combined — so each :class:`ProfessorScore` reflects only the
+    ratings relevant to that format.
+
+    Args:
+        ratings: Output of :func:`~client.get_all_ratings` or
+            :func:`~client.get_ratings_page`.
+        weights: Passed through to each :func:`compute_score` call. See its
+            docs for valid keys and defaults.
+        half_life_days: Recency decay half-life passed to each
+            :func:`compute_score` call.
+
+    Returns:
+        :class:`SplitScore` with ``online``, ``in_person``, and ``combined``
+        fields. Subsets with zero ratings return a zero-valued
+        :class:`ProfessorScore`.
+    """
+    online_ratings   = [r for r in ratings if r.is_for_online_class]
+    in_person_ratings = [r for r in ratings if not r.is_for_online_class]
+
+    return SplitScore(
+        online=compute_score(online_ratings, weights, half_life_days),
+        in_person=compute_score(in_person_ratings, weights, half_life_days),
+        combined=compute_score(ratings, weights, half_life_days),
     )

@@ -3,7 +3,7 @@ rmp_api.scoring — professor quality signals and composite scoring.
 """
 
 from .presets import WEIGHT_PRESETS
-from .score import compute_score
+from .score import compute_score, compute_split_score
 from .signals import (
     compute_difficulty_histogram,
     compute_easiness_score,
@@ -15,6 +15,7 @@ from .signals import (
 
 __all__ = [
     "compute_score",
+    "compute_split_score",
     "WEIGHT_PRESETS",
     "compute_recency_weighted_rating",
     "compute_reliability_score",

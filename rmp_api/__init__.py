@@ -13,8 +13,8 @@ from .client import (
     search_professors,
     search_schools,
 )
-from .models import ProfessorRating, ProfessorScore, Rating
-from .scoring import WEIGHT_PRESETS, compute_score
+from .models import ProfessorRating, ProfessorScore, Rating, SplitScore
+from .scoring import WEIGHT_PRESETS, compute_score, compute_split_score
 
 __all__ = [
     # Client
@@ -30,6 +30,8 @@ __all__ = [
     "ProfessorRating",
     # Scoring
     "compute_score",
+    "compute_split_score",
     "ProfessorScore",
+    "SplitScore",
     "WEIGHT_PRESETS",
 ]

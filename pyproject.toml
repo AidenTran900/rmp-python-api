@@ -19,3 +19,9 @@ packages = ["rmp_api"]
 
 [tool.hatchling.build.force-include]
 "rmp_api/queries" = "rmp_api/queries"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
